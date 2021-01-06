@@ -1,22 +1,38 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(VueRouter)
+Vue.use(ElementUI)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Login',
+    component: Login
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/home',
+    name: 'Home',
+    redirect: '/index',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home/Home.vue'),
+    children:[
+      {
+        path: '/index',
+        name: 'index',
+        component: () => import('../views/Home/index.vue')
+      }
+    ]
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('../views/ErrorPage.vue')
   }
 ]
 
