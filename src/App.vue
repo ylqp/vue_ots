@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <!-- 登录页不展示菜单 -->
-    <Menu v-show="this.$route.name !== 'Login'" />
     <router-view  :style="{minHeight:mainHeight}"/>
     <footer v-show="this.$route.name !== 'Login'">弘成教育科技有限公司</footer>
   </div>
 </template>
 <script>
-import Menu from '@/components/Menu.vue'
+
 // import HelloWorld from '@/components/HelloWorld.vue'
 export default {
   data () {
@@ -20,13 +19,8 @@ export default {
           return (this.winInnerHeight - 61 - 40) + 'px'
       }
   },
-  components: {
-    Menu,
-    // HelloWorld
-  },
   mounted () {
-    console.log(this.$route)
-    console.log(this.$route.path)
+    console.log(this.$tools.getBrowser())
   }
 }
 </script>

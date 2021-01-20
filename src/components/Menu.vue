@@ -1,6 +1,7 @@
 <template>
   <el-menu
-    :default-active="activeIndex2"
+    :default-active="$route.path"
+    :router="true"
     class="el-menu-demo"
     mode="horizontal"
     @select="handleSelect"
@@ -19,7 +20,11 @@
     <el-menu-item index="3">
       我的
     </el-menu-item> -->
-    <el-menu-item v-for="item in menuList" :key="item.name">{{item.meta.title}}</el-menu-item>
+    <el-menu-item
+        v-for="item in menuList"
+        :key="item.path"
+        :index="item.path"
+    >{{item.meta.title}}</el-menu-item>
   </el-menu>
 </template>
 <script>
@@ -32,7 +37,7 @@ export default {
         };
     },
     created () {
-        
+
         this.menuList = this.$router.options.routes.filter(item => item.name === 'Home')[0].children
         console.log(this.menuList)
     },

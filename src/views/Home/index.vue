@@ -1,5 +1,6 @@
 <template>
   <div class="routerBox">
+      我是首页
       <ul class="examList">
           <li class="examLi" v-for="examItem in examTypeobj.ActivityTypes" :key="examItem.id">{{examItem.activityTypeName}}</li>
       </ul>
@@ -31,7 +32,7 @@ export default {
     },
     mounted () {
         this.getExamType()
-        
+
     },
     created () {
         this.getUserFPSettings()

@@ -20,14 +20,14 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    redirect: '/index',
+    redirect: '/home/index',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Home/Home.vue'),
     children:[
       {
-        path: '/index',
+        path: '/home/index',
         name: 'index',
         meta: {
           title: '首页'
@@ -35,20 +35,20 @@ const routes = [
         component: () => import('../views/Home/index.vue')
       },
       {
-        path: '/index',
-        name: 'index',
+        path: '/home/midtermExamination',
+        name: 'examination',
         meta: {
-          title: '考试'
+          title: '期中考试'
         },
-        component: () => import('../views/Home/index.vue')
+        component: () => import('../views/Home/examination.vue')
       },
       {
-        path: '/index',
-        name: 'index',
+        path: '/home/finaltermExamination',
+        name: 'examination',
         meta: {
-          title: '我的'
+          title: '期末考试'
         },
-        component: () => import('../views/Home/index.vue')
+        component: () => import('../views/Home/examination.vue')
       },
     ]
   },
