@@ -19,15 +19,20 @@ export default {
         // ...mapMutations('user', ['getUserFPSettings'])
         // 获取考试类型
         getExamType () {
-            this.$http({
-                url: this.OTSAPI.QueryActivityTypeListByStudentIdAndCourseCode,
-                // url: '/api/checkCode',
-                method: 'post'
-            }).then(data => {
-                let cdata = data.data
-                this.examTypeobj = cdata
-                console.log(cdata)
-            })
+          this.$request.home.getExamType().then(data => {
+            let cdata = data.data
+            this.examTypeobj = cdata
+            console.log(cdata)
+          })
+            // this.$http({
+            //     url: this.OTSAPI.QueryActivityTypeListByStudentIdAndCourseCode,
+            //     // url: '/api/checkCode',
+            //     method: 'post'
+            // }).then(data => {
+            //     let cdata = data.data
+            //     this.examTypeobj = cdata
+            //     console.log(cdata)
+            // })
         },
     },
     mounted () {
