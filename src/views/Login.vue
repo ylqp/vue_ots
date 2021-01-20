@@ -42,7 +42,13 @@ export default {
     }
   },
   mounted: function () {
-    console.log(this.OTSAPI);
+      this.$http({
+          // url: '/api/auth/ots',
+          url: '/api/checkCode',
+          method: 'post',
+      }).then((data) => {
+        
+      })
   }
 }
 </script>

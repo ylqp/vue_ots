@@ -47,19 +47,26 @@ const request = options => {
         // 3.添加响应拦截器
         instance.interceptors.response.use(function (response) {
             // 对响应数据做点什么
-            if(response.data.status === 1){
+            if (response.config.url.indexOf('/checkCode')) {
                 setTimeout(function() {
-                    
                     loading.close()
-                    
                 }, 1000)
-            }else {
-                ev.$message({
-                    showClose: true,
-                    message: response.data.error,
-                    type: 'error'
-                });
+            } else {
+                if(response.data.status === 1){
+                    setTimeout(function() {
+                        
+                        loading.close()
+                        
+                    }, 1000)
+                }else {
+                    ev.$message({
+                        showClose: true,
+                        message: response.data.error,
+                        type: 'error'
+                    });
+                }
             }
+            
             return response.data   
 
         }, function (error) {

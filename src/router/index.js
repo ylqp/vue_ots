@@ -25,8 +25,27 @@ const routes = [
       {
         path: '/index',
         name: 'index',
+        meta: {
+          title: '首页'
+        },
         component: () => import('../views/Home/index.vue')
-      }
+      },
+      {
+        path: '/index',
+        name: 'index',
+        meta: {
+          title: '考试'
+        },
+        component: () => import('../views/Home/index.vue')
+      },
+      {
+        path: '/index',
+        name: 'index',
+        meta: {
+          title: '我的'
+        },
+        component: () => import('../views/Home/index.vue')
+      },
     ]
   },
   {
