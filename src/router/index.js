@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+//解决路由报错问题
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
 import Login from '../views/Login.vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(VueRouter)
-Vue.use(ElementUI)
 
 const routes = [
   {
@@ -57,6 +61,11 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+//全局守卫
+router.beforeEach((to, from, next) => {
+  next()
 })
 
 export default router

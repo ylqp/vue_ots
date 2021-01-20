@@ -137,7 +137,7 @@ const otsapi = {
     // 提交题目
     SubmitQuestion: domainName + 'QuestionsManage/QuestionInput/SubmitQuestion',
     // 试题导入
-    ImportQuestions: domainName + 'QuestionsManage/QuestionImport/ImportQuestions',
+    ImportQuestionsS: domainName + 'QuestionsManage/QuestionImport/ImportQuestions',
     //
     DownloadImportInstruction: domainName + 'QuestionsManage/QuestionImport/DownloadImportInstruction',
     //
@@ -313,7 +313,7 @@ const otsapi = {
     // 查看答题情况
     QueryAnswerPaperQuestion: domainName + 'TestActivity/QueryAnswerPaperQuestion',
     // 通过条件查询错题列表
-    QueryWrongQuestionListByConditions: domainName + 'TestActivity/QueryWrongQuestionListByConditions',
+    QueryWrongQuestionListByConditionsS: domainName + 'TestActivity/QueryWrongQuestionListByConditions',
     // 移除错题
     RemoveWrongQuestions: domainName + 'TestActivity/RemoveWrongQuestions',
     // 获取活动安排评阅统计信息

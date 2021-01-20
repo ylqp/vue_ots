@@ -4,6 +4,7 @@ import OTSAPI from './http/api'
 import request from './http/request'
 import router from './router'
 import store from './store'
+import plugins from './plugins'
 
 // import ElementUI from 'element-ui'
 
@@ -11,6 +12,8 @@ import store from './store'
 Vue.config.productionTip = false
 Vue.prototype.$http = request
 Vue.prototype.OTSAPI = OTSAPI
+Vue.prototype.$eventBus = new Vue()
+Vue.use(plugins)
 // Vue.use(ElementUI)
 // console.log(OTSAPI)
 //基础样式
