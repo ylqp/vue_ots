@@ -8,7 +8,18 @@
   export default {
     name: "examination",
     mounted () {
-      console.log(123)
+      // console.log(123)
+    },
+    methods : {
+      getData () {
+        console.log(123)
+      }
+    },
+    watch : {
+      $route:{
+        handler:'getData',
+        immediate: true
+      }
     }
   }
 </script>
