@@ -10,7 +10,7 @@ module.exports = {
                 pathRewrite: {'^/api' : ''},
                 ws: true,
                 changeOrigin: true,     // target是域名的话，需要这个参数，
-                // secure: false,
+                secure: false
             }
         },
         // proxy: 'https://otstest.chinaedu.net:8443/mini'

@@ -17,7 +17,7 @@ request.interceptors.request.use((config) => {
 })
 
 request.interceptors.response.use((response) => {
-    console.log(response.headers[cookie])
+    console.log(response.headers)
     return response
 }, async (error) => {
     // 错误处理
