@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-loading="loading">
+  <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/>
      -->
@@ -13,42 +13,31 @@
 
 <script>
 // @ is an alias to /src
-
+import { getCheckCode, login } from '@/service/user'
 export default {
   name: 'Home',
   components: {
   },
-  methods: {
-    loginIn: function () {
-      let oParams = {
-          "needCheckCode":0,
-          "name":'stu3',
-          "pass":"e10adc3949ba59abbe56e057f20f883e",
-          "checkCode":"",
-          "roleType":2,//学生
-          "tenant":"cate"
+  data () {
+    return {
+      loginParams: {
+        needCheckCode: 0,
+        name: 'stu3',
+        pass: 'e10adc3949ba59abbe56e057f20f883e',
+        checkCode: '',
+        roleType: 2,
+        tenant: 'cate'
       }
-      this.$http({
-          url: '/api/auth/ots',
-          // url: '/api/checkCode',
-          method: 'post',
-          params: oParams
-      }).then((data) => {
-          if(Boolean(data.data.succeeded) === true){
-            // 跳转首页
-            this.$router.push('/home')
-          }
-      })
+    }
+  },
+  methods: {
+    async loginIn () {
+      const { data } = await login(this.loginParams)
+      console.log(data)
     }
   },
   mounted: function () {
-      this.$http({
-          // url: '/api/auth/ots',
-          url: '/api/checkCode',
-          method: 'post',
-      }).then((data) => {
-        
-      })
+      getCheckCode()
   }
 }
 </script>

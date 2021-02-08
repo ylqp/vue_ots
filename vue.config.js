@@ -4,8 +4,8 @@ module.exports = {
         port: 3241,
         proxy: {
             '/api': {
-                target: 'http://172.16.6.130:8080/oxer',//https://otstest.chinaedu.net:8443/
-                // target: 'https://otstest.chinaedu.net:8443/mini',//https://otstest.chinaedu.net:8443
+                // target: 'http://172.16.6.130:8080/oxer',//https://otstest.chinaedu.net:8443/
+                target: 'https://otstest.chinaedu.net:8443/mini',//https://otstest.chinaedu.net:8443
                 // target: 'https://api.github.com',
                 pathRewrite: {'^/api' : ''},
                 ws: true,
