@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import HomeLayout from '../views/Home/components/homeLayout.vue'
 
 //解决路由报错问题
 const routerPush = VueRouter.prototype.push
@@ -13,21 +14,19 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Login',
+    path: '/login',
+    name: 'login',
     component: Login
   },
   {
-    path: '/home',
-    name: 'Home',
-    redirect: '/home/index',
+    path: '/',
+    component: HomeLayout,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home/Home.vue'),
     children:[
       {
-        path: '/home/index',
+        path: '',
         name: 'index',
         meta: {
           title: '首页'
@@ -35,22 +34,29 @@ const routes = [
         component: () => import('../views/Home/index.vue')
       },
       {
-        path: '/home/midtermExamination',
-        name: 'examination',
+        path: '/examList',
+        name: 'examList',
         meta: {
-          title: '期中考试'
+          title: '考试列表'
         },
-        component: () => import('../views/Home/examination.vue')
+        component: () => import('../views/Home/examList.vue')
       },
       {
-        path: '/home/finaltermExamination',
-        name: 'examination',
+        path: '/payList',
+        name: 'payList',
         meta: {
-          title: '期末考试'
+          title: '付费列表'
         },
-        component: () => import('../views/Home/examination.vue')
+        component: () => import('../views/Home/payList.vue')
       },
     ]
+  },
+  {
+    path: '/exam',
+    name: 'exam',
+    meta: {
+      title: '考试'
+    }
   },
   {
     path: '*',

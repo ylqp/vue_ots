@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "examination",
+    name: "ExamList",
     mounted () {
       // console.log(123)
     },

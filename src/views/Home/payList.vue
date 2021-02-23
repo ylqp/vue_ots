@@ -7,7 +7,7 @@
 <script>
   import Menu from '@/components/Menu.vue'
   export default {
-    name : 'home',
+    name : 'PayList',
     components: {
       Menu,
       // HelloWorld

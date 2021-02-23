@@ -5,6 +5,7 @@ module.exports = {
         proxy: {
             '/api': {
                 // target: 'http://172.16.6.130:8080/oxer',//https://otstest.chinaedu.net:8443/
+                https: true,
                 target: 'https://otstest.chinaedu.net:8443/mini',//https://otstest.chinaedu.net:8443
                 // target: 'https://api.github.com',
                 pathRewrite: {'^/api' : ''},

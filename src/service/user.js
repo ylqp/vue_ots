@@ -7,7 +7,8 @@ import request from '@/http/request'
 export const getCheckCode = () => {
     return request({
         method: 'POST',
-        url: '/api/checkCode'
+        url: '/api/checkCode',
+        responseType: 'arraybuffer'
     })
 }
 // 登录
