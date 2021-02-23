@@ -85,10 +85,10 @@ export default {
       this.checkCodeImg = '/api/checkCode?' + Math.random()
     },
     getLoginStatus (reason) {
-        return loginStatus[reason]
+        return loginStatus[reason] || '登录失败，请联系管理员'
     },
     handleFalse (reason) {
-      let loginStatus = this.getLoginStatus(reason) || '登录失败，请联系管理员'
+      let loginStatus = this.getLoginStatus(reason)
       if (loginStatus === 'needCheckCode') {
           this.handleCheckCode()
       }
