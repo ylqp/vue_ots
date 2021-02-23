@@ -33,6 +33,16 @@
 import OtsFooter from '@/components/footer.vue'
 import { getCheckCode, login } from '@/service/user'
 import md5 from 'js-md5'
+const loginStatus = {
+    'needCheckCode' : '需要验证码',
+    'checkCodeError' : '验证码错误',
+    'noUserName' : '用户名不存在',
+    'maxFailTime' : '半小时内错误次数超过5次',
+    'passwordError' : '密码错误',
+    'userDisenabled' : '用户停用',
+    'userNorole' : '用户无权限',
+    'orgDisenabled' : '组织机构已停用',
+}
 export default {
   name: 'Login',
   components: {
@@ -74,38 +84,46 @@ export default {
       // 刷新最新验证码
       this.checkCodeImg = '/api/checkCode?' + Math.random()
     },
+    getLoginStatus (reason) {
+        return loginStatus[reason]
+    },
     handleFalse (reason) {
-      let showReason
-      switch (reason) {
-        case 'needCheckCode':
-          showReason = '需要验证码'
-          this.handleCheckCode ()
-          break
-        case 'checkCodeError':
-          showReason = '验证码错误'
-          break
-        case 'noUserName':
-          showReason = '用户名不存在'
-          break
-        case 'maxFailTime':
-          showReason = '半小时内错误次数超过5次'
-          break
-        case 'passwordError':
-          showReason = '密码错误'
-          break
-        case 'userDisenabled':
-          showReason = '用户停用'
-          break
-        case 'userNorole':
-          showReason = '用户无权限'
-          break
-        case 'orgDisenabled':
-          showReason = '组织机构已停用'
-          break
-        default:
-          showReason = '登录失败，请联系管理员'
+      let loginStatus = this.getLoginStatus(reason) || '登录失败，请联系管理员'
+      if (loginStatus === 'needCheckCode') {
+          this.handleCheckCode()
       }
-      this.$message.error(showReason)
+      this.$message.error(loginStatus)
+      // let showReason
+      // switch (reason) {
+      //   case 'needCheckCode':
+      //     showReason = '需要验证码'
+      //     this.handleCheckCode ()
+      //     break
+      //   case 'checkCodeError':
+      //     showReason = '验证码错误'
+      //     break
+      //   case 'noUserName':
+      //     showReason = '用户名不存在'
+      //     break
+      //   case 'maxFailTime':
+      //     showReason = '半小时内错误次数超过5次'
+      //     break
+      //   case 'passwordError':
+      //     showReason = '密码错误'
+      //     break
+      //   case 'userDisenabled':
+      //     showReason = '用户停用'
+      //     break
+      //   case 'userNorole':
+      //     showReason = '用户无权限'
+      //     break
+      //   case 'orgDisenabled':
+      //     showReason = '组织机构已停用'
+      //     break
+      //   default:
+      //     showReason = '登录失败，请联系管理员'
+      // }
+
     },
     async loginIn () {
 
@@ -122,7 +140,7 @@ export default {
         if (JSON.parse(data.succeeded)){ //JSON.parse("false")
           // 跳转首页
           this.$router.push('/')
-        }else{ 
+        }else{
           // 处理错误
           this.handleFalse(data.reason)
         }
@@ -132,7 +150,7 @@ export default {
         console.log('登录失败' + error)
 
       }
-      
+
     }
 
   },
