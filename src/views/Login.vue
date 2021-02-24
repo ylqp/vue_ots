@@ -89,7 +89,7 @@ export default {
     },
     handleFalse (reason) {
       let loginStatus = this.getLoginStatus(reason)
-      if (loginStatus === 'needCheckCode') {
+      if (reason === 'needCheckCode') {
           this.handleCheckCode()
       }
       this.$message.error(loginStatus)
