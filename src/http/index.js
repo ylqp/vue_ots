@@ -1,6 +1,6 @@
 import home from './modules/home'
-import examination from './modules/examination'
+import exam from './modules/exam'
 export default {
   home,
-  examination
+  exam
 }

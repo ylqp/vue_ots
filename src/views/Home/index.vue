@@ -2,28 +2,31 @@
   <div class="routerBox">
       我是首页
       <ul class="examList">
-          <li class="examLi" v-for="examItem in examTypeobj.ActivityTypes" :key="examItem.id">{{examItem.activityTypeName}}</li>
+          <li class="examLi" v-for="examItem in examTypeList.ActivityTypes" :key="examItem.id">{{examItem.activityTypeName}}</li>
       </ul>
   </div>
 </template>
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
     data () {
         return {
             examTypeobj: {},
         }
     },
+    computed: {
+        ...mapState('examType', ['examTypeList'])
+    },
     methods:{
-        ...mapActions('user', ['getUserFPSettings']),
+        // ...mapActions('user', ['getUserFPSettings']),
         // ...mapMutations('user', ['getUserFPSettings'])
         // 获取考试类型
-        getExamType () {
-          this.$request.home.getExamType().then(data => {
-            let cdata = data.data
-            this.examTypeobj = cdata
-            console.log(cdata)
-          })
+        // getExamType () {
+        //     this.$request.home.getExamType().then(data => {
+        //         let cdata = data.data
+        //         this.examTypeobj = cdata
+        //         console.log(cdata)
+        //     })
             // this.$http({
             //     url: this.OTSAPI.QueryActivityTypeListByStudentIdAndCourseCode,
             //     // url: '/api/checkCode',
@@ -33,14 +36,14 @@ export default {
             //     this.examTypeobj = cdata
             //     console.log(cdata)
             // })
-        },
+        // },
     },
     mounted () {
-        this.getExamType()
+        // this.getExamType()
 
     },
     created () {
-        this.getUserFPSettings()
+        // this.getUserFPSettings()
     }
 }
 </script>

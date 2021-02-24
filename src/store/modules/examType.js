@@ -1,28 +1,28 @@
-import axios from 'axios'
+import request from '../../http/request'
 import OTSAPI from '../../http/api.js'
 
-// const state = {userFPSettings: []}
-// const getters = {}
-// const mutations = {
-//     setUserFPSettings (state, settings) {
-//         state.userFPSettings = settings
-//     }
-// }
-// const actions = {
-//     async getUserFPSettings ({ commit }) {
+const state = {examTypeList: []}
+const getters = {}
+const mutations = {
+    setExamTypeList (state, settings) {
+        state.examTypeList = settings
+    }
+}
+const actions = {
+    async geExamTypeList ({ commit }) {
         
-//         const { data } = await axios({
-//             method: 'GET',
-//             url: OTSAPI.UserFPSettings
-//         })
-//         commit('setUserFPSettings', data)
-//     }
-// }
+        const { data } = await request({
+            method: 'GET',
+            url: OTSAPI.QueryActivityTypeListByStudentIdAndCourseCode
+        })
+        commit('setExamTypeList', data)
+    }
+}
 
-// export default {
-//     namespaced: true,
-//     state,
-//     getters,
-//     mutations,
-//     actions
-// }
+export default {
+    namespaced: true,
+    state,
+    getters,
+    mutations,
+    actions
+}

@@ -93,37 +93,6 @@ export default {
           this.handleCheckCode()
       }
       this.$message.error(loginStatus)
-      // let showReason
-      // switch (reason) {
-      //   case 'needCheckCode':
-      //     showReason = '需要验证码'
-      //     this.handleCheckCode ()
-      //     break
-      //   case 'checkCodeError':
-      //     showReason = '验证码错误'
-      //     break
-      //   case 'noUserName':
-      //     showReason = '用户名不存在'
-      //     break
-      //   case 'maxFailTime':
-      //     showReason = '半小时内错误次数超过5次'
-      //     break
-      //   case 'passwordError':
-      //     showReason = '密码错误'
-      //     break
-      //   case 'userDisenabled':
-      //     showReason = '用户停用'
-      //     break
-      //   case 'userNorole':
-      //     showReason = '用户无权限'
-      //     break
-      //   case 'orgDisenabled':
-      //     showReason = '组织机构已停用'
-      //     break
-      //   default:
-      //     showReason = '登录失败，请联系管理员'
-      // }
-
     },
     async loginIn () {
 
