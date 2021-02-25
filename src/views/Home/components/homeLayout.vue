@@ -17,7 +17,7 @@
 import OtsFooter from '@/components/footer.vue'
 import Nav from './nav.vue'
 
-import { mapMutations, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'HomeLayout',
@@ -26,11 +26,9 @@ export default {
     Nav
   },
   methods: {
-    ...mapActions('user', ['getUserFPSettings']),
     ...mapActions('examType', ['geExamTypeList']),
   },
   async created () {
-    await this.getUserFPSettings()
     await this.geExamTypeList()
   }
 }

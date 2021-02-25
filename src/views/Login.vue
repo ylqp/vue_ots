@@ -32,6 +32,7 @@
 // @ is an alias to /src
 import OtsFooter from '@/components/footer.vue'
 import { getCheckCode, login } from '@/http/modules/login.js'
+import { mapActions } from 'vuex'
 import md5 from 'js-md5'
 const loginStatus = {
     'needCheckCode' : '需要验证码',
@@ -78,6 +79,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('user', ['getUserFPSettings']),
     async handleCheckCode () {
       this.loginParams.needCheckCode = 1
       await getCheckCode()
@@ -107,6 +109,8 @@ export default {
         // 3. 调接口并处理结果
         const { data } = await login(this.loginParams)
         if (JSON.parse(data.succeeded)){ //JSON.parse("false")
+          // 先把用户信息设置一下
+          await this.getUserFPSettings()
           // 跳转首页
           this.$router.push('/')
         }else{
@@ -124,6 +128,8 @@ export default {
 
   },
   created () {
+    // 清空信息
+    window.localStorage.setItem('userFPSettings', 'null')
     // 获取session
     getCheckCode()
   },
