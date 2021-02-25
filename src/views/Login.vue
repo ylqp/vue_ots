@@ -31,7 +31,7 @@
 <script>
 // @ is an alias to /src
 import OtsFooter from '@/components/footer.vue'
-import { getCheckCode, login } from '@/service/user'
+import { getCheckCode, login } from '@/http/modules/login.js'
 import md5 from 'js-md5'
 const loginStatus = {
     'needCheckCode' : '需要验证码',

@@ -26,9 +26,11 @@ export default {
     Nav
   },
   methods: {
+    ...mapActions('user', ['getUserFPSettings']),
     ...mapActions('examType', ['geExamTypeList']),
   },
   created () {
+    this.getUserFPSettings()
     this.geExamTypeList()
   }
 }

@@ -1,5 +1,5 @@
-import axios from 'axios'
-import OTSAPI from '../../http/api.js'
+
+import home from '../../http/modules/home'
 
 const state = {userFPSettings: []}
 const getters = {}
@@ -11,10 +11,7 @@ const mutations = {
 const actions = {
     async getUserFPSettings ({ commit }) {
         
-        const { data } = await axios({
-            method: 'GET',
-            url: OTSAPI.UserFPSettings
-        })
+        const { data } = await home.getUserFPSettings()
         commit('setUserFPSettings', data)
     }
 }

@@ -58,7 +58,7 @@ export default {
     height: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
   }
   .nav-list {
     margin-left: 30px;

@@ -1,7 +1,6 @@
 /**
- *  用户请求相关模块
  */
-import request from '@/http/request'
+import request from '../request'
 
 // 获取验证码
 export const getCheckCode = () => {
