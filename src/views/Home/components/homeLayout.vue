@@ -29,9 +29,9 @@ export default {
     ...mapActions('user', ['getUserFPSettings']),
     ...mapActions('examType', ['geExamTypeList']),
   },
-  created () {
-    this.getUserFPSettings()
-    this.geExamTypeList()
+  async created () {
+    await this.getUserFPSettings()
+    await this.geExamTypeList()
   }
 }
 </script>
