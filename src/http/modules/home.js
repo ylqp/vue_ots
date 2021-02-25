@@ -9,10 +9,11 @@ const getUserFPSettings = () => {
   })
 }
 // 获取考试类型
-const getExamType = () => {
+const getExamType = (data) => {
   return request({
-    method: 'GET',
-    url : api.QueryActivityTypeListByStudentIdAndCourseCode
+    method: 'POST',
+    url : api.QueryActivityTypeListByStudentIdAndCourseCode,
+    data
   })
 }
 

@@ -11,11 +11,14 @@ const mutations = {
 }
 const actions = {
     async geExamTypeList ({  commit, rootState  }) {
-        console.log(rootState)
-        console.log(rootState.user.userFPSettings)
+        // console.log(rootState)
+        // console.log(rootState.user.userFPSettings)
         if (rootState.user.userFPSettings && rootState.user.userFPSettings.uesrName){
             const { data } = await home.getExamType({userid: rootState.user.userFPSettings.uesrName})
             commit('setExamTypeList', data)
+        } else {
+            // 跳到登录页
+            
         }
     }
 }

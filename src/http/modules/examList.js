@@ -3,9 +3,9 @@
 import api from '../api'
 import request from '../request'
 
-export const getExamListByTypeId = data => {
+export const getExamListByTypeId = (data) => {
     return request({
-        method: 'GET',
+        method: 'POST',
         url: api.QueryStudentArrangementListByTypeIdAndCoursecode,
         data
     })
