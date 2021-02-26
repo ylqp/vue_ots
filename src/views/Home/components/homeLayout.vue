@@ -36,9 +36,16 @@ export default {
 <style scoped>
 .el-container {
   min-height: 100vh;
+  min-width: 1080px;
 }
 .el-header {
   background-color: #3388ff;
+  /* width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; */
 }
 .el-footer {
   height: 40px !important;
@@ -47,5 +54,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: calc(100vh - 120px);
 }
 </style>

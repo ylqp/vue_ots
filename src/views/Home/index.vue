@@ -1,12 +1,11 @@
 <template>
   <div class="routerBox">
-      我是首页
       <ul class="examList">
             <li 
                 class="examLi" 
                 v-for="item in examTypeList.ActivityTypes" 
                 :key="item.id"
-                @click="goExamList"
+                @click="goExamList(item.id)"
             >
                 {{item.activityTypeName}}
             </li>
@@ -26,8 +25,13 @@ export default {
         ...mapState('examType', ['examTypeList'])
     },
     methods:{
-        goExamList () {
-
+        goExamList (examTypeId) {
+            this.$router.push({
+                name: 'examList',
+                params: {
+                  id: examTypeId
+                }
+            })
         }
     },
     mounted () {

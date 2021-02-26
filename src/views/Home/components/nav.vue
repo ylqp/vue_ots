@@ -44,14 +44,14 @@ export default {
 }
 </script>
 <style scoped>
-  .nav {
+  /* .nav {
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-  }
+  } */
   .nav-content {
     position: relative;
     width: 90%;

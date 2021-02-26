@@ -112,7 +112,7 @@ export default {
           // 先把用户信息设置一下
           await this.getUserFPSettings()
           // 跳转首页
-          this.$router.push('/')
+          this.$router.push('/index')
         }else{
           // 处理错误
           this.handleFalse(data.reason)

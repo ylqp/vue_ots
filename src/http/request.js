@@ -1,11 +1,21 @@
 import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
+import router from '@/router'
 // 默认带cookie
 axios.defaults.withCredentials = true
 const request = axios.create({
     
 })
+
+function redirectLogin () {
+    router.push({
+        name: 'login',
+        query: {
+            redirect: router.currentRoute.fullPath
+        }
+    })
+}
 
 // 请求拦截器
 request.interceptors.request.use((config) => {
@@ -29,9 +39,15 @@ request.interceptors.response.use((response) => {
 }, async (error) => {
     // 错误处理
     if (error.response) { // 请求收到响应，状态码超出了2XX
-
-        Message.error('请求失败')
-
+        const { status } = error.response
+        if (status === 400) {
+            Message.error('请求参数错误')
+        } else if (status === 401) {
+            Message.error('登录超时，请重新登录')
+            redirectLogin()
+        } else {
+            Message.error('请求失败')
+        }
     } else if (error.request) { // 请求发出去了但是没有收到响应，一般为请求超时
 
         Message.error('请求超时')

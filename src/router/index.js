@@ -15,12 +15,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: Login
   },
   {
-    path: '/',
+    path: '/index',
     component: HomeLayout,
     meta: { 
       requiresAuth: true
@@ -38,7 +38,7 @@ const routes = [
         component: () => import('../views/Home/index.vue')
       },
       {
-        path: '/examList',
+        path: '/examList/:id',
         name: 'examList',
         meta: {
           title: '考试列表'
