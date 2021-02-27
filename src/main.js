@@ -19,6 +19,7 @@ Vue.use(plugins)
 // console.log(OTSAPI)
 //基础样式
 import './assets/style/reset.css'
+import './assets/style/common.css'
 // import './assets/style/icon/iconfont.css'
 new Vue({
   router,

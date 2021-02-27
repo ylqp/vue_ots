@@ -1,9 +1,9 @@
 <template>
     <div class="examList">
-      <el-tabs v-model="activeName" @tab-click="handleClick" class="statuTabs">
-        <el-tab-pane label="进行中" name="first"></el-tab-pane>
-        <el-tab-pane label="未开始" name="second"></el-tab-pane>
-        <el-tab-pane label="已结束" name="third"></el-tab-pane>
+      <el-tabs v-model="djjj" @tab-click="handleClick" class="statuTabs">
+        <el-tab-pane label="进行中" name="3"></el-tab-pane>
+        <el-tab-pane label="未开始" name="2"></el-tab-pane>
+        <el-tab-pane label="已结束" name="4"></el-tab-pane>
       </el-tabs>
       <div class="serachBox">
           <el-input
@@ -17,20 +17,45 @@
           :data="tableData"
           style="width: 100%">
           <el-table-column
-            prop="date"
-            label="日期"
+            prop="testactivityarrangementname"
+            label="考试名称"
             width="180">
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="姓名"
+            prop="starttime"
+            label="考试时间"
             width="180">
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址">
+            prop="needcnt"
+            label="考试机会"
+            width="180">
+            <template slot-scope="scope">
+              <span class="col_red">{{scope.row.currentcnt}}</span>
+              <span>{{'/' + scope.row.needcnt}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="coursename"
+            label="所属课程">
+          </el-table-column>
+          <el-table-column
+            prop="finalscore"
+            label="考试成绩"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            label="操作"
+            width="180">
+            <el-button type="primary">开始考试</el-button>
           </el-table-column>
         </el-table>
+        <el-pagination
+          class="mt20"
+          background
+          layout="prev, pager, next"
+          :total="1000">
+        </el-pagination>
       </div>
     </div>
 </template>
@@ -41,25 +66,9 @@ import { getExamListByTypeId } from '@/http/modules/examList'
     name: "ExamList",
     data () {
       return {
-        activeName: '',
+        djjj:'',
         input21: '',
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
+        tableData: [],
         examListParams: {
           status: 3,
           activitytypeid: this.$route.params.id
@@ -74,9 +83,10 @@ import { getExamListByTypeId } from '@/http/modules/examList'
         // console.log(this.$route.params.id)
         const { data } = await getExamListByTypeId(this.examListParams)
         console.log(data)
+        this.tableData = data.ActivityArrangements
       },
       handleClick () {
-        console.log(this.activeName)
+        this.getData()
       }
     },
     watch : {
@@ -90,8 +100,6 @@ import { getExamListByTypeId } from '@/http/modules/examList'
 
 <style scoped>
 .examList{
-  width: 100%;
-  min-height: 100%;
   position: relative;
 }
 .statuTabs{

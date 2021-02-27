@@ -51,9 +51,6 @@ export default {
   height: 40px !important;
 }
 .el-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 120px);
+  min-height: calc(100vh - 120px);
 }
 </style>
