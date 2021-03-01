@@ -5,7 +5,7 @@
                 class="examLi" 
                 v-for="item in examTypeList.ActivityTypes" 
                 :key="item.id"
-                @click="goExamList(item.id)"
+                @click="goExamList(item.id, item.takePhotoInTest)"
             >
                 {{item.activityTypeName}}
             </li>
@@ -25,11 +25,12 @@ export default {
         ...mapState('examType', ['examTypeList'])
     },
     methods:{
-        goExamList (examTypeId) {
+        goExamList (examTypeId, needPhoto) {
             this.$router.push({
                 name: 'examList',
                 params: {
-                  id: examTypeId
+                  id: examTypeId,
+                  takePhotoInTest: needPhoto
                 }
             })
         }

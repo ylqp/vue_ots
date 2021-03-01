@@ -8,6 +8,13 @@
               <div class="nav-list">
                   <div 
                     class="nav-item"
+                    @click="$router.push({
+                      name: 'examList',
+                      params: {
+                        id: item.id,
+                        takePhotoInTest: item.takePhotoInTest
+                      }
+                    })"
                     v-for="item in examTypeList.ActivityTypes"
                     :key="item.activityTypeName"
                   >

@@ -38,7 +38,7 @@ const routes = [
         component: () => import('../views/Home/index.vue')
       },
       {
-        path: '/examList/:id',
+        path: '/examList/:id/:takePhotoInTest',
         name: 'examList',
         meta: {
           title: '考试列表'
@@ -56,11 +56,12 @@ const routes = [
     ]
   },
   {
-    path: '/exam',
+    path: '/exam/:id',
     name: 'exam',
     meta: {
       title: '考试'
-    }
+    },
+    component: () => import('../views/Exam.vue')
   },
   {
     path: '*',

@@ -1,15 +1,16 @@
 <template>
     <div class="examList">
-      <el-tabs v-model="djjj" @tab-click="handleClick" class="statuTabs">
+      <el-tabs v-model="status" @tab-click="handleClick" class="statuTabs">
         <el-tab-pane label="进行中" name="3"></el-tab-pane>
         <el-tab-pane label="未开始" name="2"></el-tab-pane>
         <el-tab-pane label="已结束" name="4"></el-tab-pane>
       </el-tabs>
       <div class="serachBox">
-          <el-input
-          placeholder="请输入内容"
-          suffix-icon="el-icon-search"
-          v-model="input21">
+        <el-input
+          clearable
+          prefix-icon="el-icon-search"
+          placeholder="请输入内容  回车搜索"
+          v-model="examListParams.fulltext">
         </el-input>
       </div>
       <div class="examList-content">
@@ -47,45 +48,83 @@
           <el-table-column
             label="操作"
             width="180">
-            <el-button type="primary">开始考试</el-button>
+            <template slot-scope="scope">
+              <el-button 
+                type="primary" 
+                @click="$router.push({
+                  name: 'exam',
+                  params: {
+                    id: scope.row.testactivityarrangementid
+                  }
+                })"
+              >开始考试</el-button>
+            </template>
           </el-table-column>
         </el-table>
         <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :page-sizes="[10, 20, 30]"
+          :page-size.sync="page.pageSize"
+          :current-page.sync="page.pageNo"
           class="mt20"
           background
-          layout="prev, pager, next"
-          :total="1000">
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
         </el-pagination>
       </div>
     </div>
 </template>
 
 <script>
-import { getExamListByTypeId } from '@/http/modules/examList'
+  import { getExamListByTypeId } from '@/http/modules/examList'
+  
   export default {
     name: "ExamList",
     data () {
       return {
-        djjj:'',
-        input21: '',
+        status: "2",
         tableData: [],
+        total:0,
         examListParams: {
-          status: 3,
+          status: "3",
+          fulltext: '',
           activitytypeid: this.$route.params.id
+        },
+        page: {
+          pageSize: 10,
+          pageNo: 1
         }
       }
     },
     mounted () {
       // this.getData()
+      document.onkeydown = e => {
+
+        let _key = window.event.keyCode
+        if (_key === 13) {
+          this.getData()
+        }
+      }
     },
     methods : {
       async getData () {
-        // console.log(this.$route.params.id)
-        const { data } = await getExamListByTypeId(this.examListParams)
+        this.examListParams.activitytypeid = this.$route.params.id
+        let params = Object.assign(this.examListParams, this.page)
+        const { data } = await getExamListByTypeId(params)
         console.log(data)
         this.tableData = data.ActivityArrangements
+        this.total = data.total
       },
       handleClick () {
+        this.examListParams.status = this.status
+        this.page.pageNo = 1
+        this.getData()
+      },
+      handleCurrentChange (val) {
+        this.getData()
+      },
+      handleSizeChange (val) {
         this.getData()
       }
     },
