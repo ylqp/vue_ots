@@ -41,4 +41,11 @@ footer {
       text-align: center;
       color: #fff;
 }
+/* el 样式在子组件中不管用 */
+.el-scrollbar .el-scrollbar__wrap{
+    overflow-x: hidden !important;
+    /* overflow: scroll;
+    width: 110%;
+    height: 120%; */
+}
 </style>

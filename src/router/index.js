@@ -61,7 +61,12 @@ const routes = [
     meta: {
       title: '考试'
     },
-    component: () => import('../views/Exam.vue')
+    component: () => import('../views/Exam/index.vue')
+  },
+  { 
+    path: '/test/editor',
+    name: 'editor',
+    component: () => import('../components/editor.vue')
   },
   {
     path: '*',

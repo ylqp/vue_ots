@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    takePhotoInTest: 0
+    takePhotoInTest: 0,
+    options: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q']
   },
   mutations: {
     setNeedPhoto (state, settings) {

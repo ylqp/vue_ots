@@ -292,6 +292,8 @@ const otsapi = {
     GetTestActivityArrangementsByActivityTypeId: domainName + 'TestActivity/GetTestActivityArrangementsByActivityTypeId',
     // 开始参加考试
     StartAnswerPaper: domainName + 'TestActivity/StartAnswerPaper',
+    // 查询考试活动信息
+    QueryTestActivityArrangementInfo: domainName + 'TestActivity/QueryTestActivityArrangementInfo',
     // 开始参加考试(小程序)
     StartAnswerPaperByMini: domainName + 'TestActivity/StartAnswerPaperByMini',
     //开始参加考试(人脸验证)
