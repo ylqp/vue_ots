@@ -19,9 +19,10 @@
         <div class="btnBox">
             <el-button type="primary" @click="$emit('dealSubmit', 1)">保存</el-button>
             <el-button type="primary" @click="$emit('dealSubmit', 0)">交卷</el-button>
+            <!-- <el-button type="primary" @click="toUp">去头部</el-button> -->
         </div>
         <div class="helpLinkBox">
-            <router-link class="helpLink" to="home">考试遇到问题？</router-link>
+            <router-link class="helpLink" to="home" >考试遇到问题？</router-link>
         </div>
     </div>
 </template>
@@ -32,6 +33,9 @@ export default {
     methods: {
         dealSubmit () {
             this.$emit('dealSubmit')
+        },
+        toUp () {
+            
         }
     }
 }

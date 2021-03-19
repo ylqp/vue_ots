@@ -8,7 +8,7 @@
       :question="question"
     />
     <BlankFilling v-if="answerMode === 'BlankFilling'" :question="question" />
-    <EssayQuestion v-if="answerMode === 'EssayQuestion'" />
+    <EssayQuestion v-if="answerMode === 'EssayQuestion'" :question="question"/>
   </div>
 </template>
 <script>
@@ -40,4 +40,7 @@ export default {
 };
 </script>
 <style scoped>
+.subQue {
+  width: 90%;
+}
 </style>

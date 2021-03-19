@@ -48,6 +48,14 @@ const dealAnswer_Judgement = queItem => {
 }
 const dealAnswer_EssayQuestion = queItem => {
 
+    const content = { content: queItem.webData.answer}
+
+    let answerItem = {
+        questionId: queItem.questionId,
+        content: JSON.stringify(content)
+    }
+
+    return answerItem
 }
 const dealAnswer_JudgementCorrectsMistakes = queItem => {
 
@@ -62,11 +70,24 @@ const dealAnswer_JudgementCorrectsMistakes = queItem => {
 }
 const dealAnswer_Composite = queItem => {
 
+    let subQuestionAnswerList = []
+    if (queItem.subqustionList) {
+        queItem.subqustionList.forEach(subItem => {
+            const subAnswerItem = dealQueItemAnswer(subItem)
+            subQuestionAnswerList.push(subAnswerItem)
+        })
+    }
+    let answerItem = {
+        questionId: queItem.questionId,
+        content: "",
+        subQuestionAnswerList: subQuestionAnswerList
+    }
+    return answerItem
 }
 
 const dealQueItemAnswer = queItem => {
     let answerItem = {}
-    if (!queItem.webData || !queItem.webData.isAnswer) {
+    if ((!queItem.webData || !queItem.webData.isAnswer) && queItem.answerMode !== 'Composite') {
         return {}
     }
     switch (queItem.answerMode) {

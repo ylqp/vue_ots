@@ -13,6 +13,7 @@
                     
                     <div v-for="queItem in item.paperQuestionList" :key="queItem.questionId">
                         <template v-if="queItem.answerMode !== 'Composite'">
+                        <!-- <template> -->
                             <div class="queStemBox mb20">
                                 <question-stem :stem='queItem.stem'/>
                             </div>
@@ -22,7 +23,14 @@
                         </template>
                         <!-- 复合题 -->
                         <template v-else>
-                            
+                            <div v-for="subItem in queItem.subqustionList" :key="subItem.questionId">
+                                <div class="queStemBox mb20">
+                                    <question-stem :stem='subItem.stem'/>
+                                </div>
+                                <div class="queContentBox mb20">
+                                    <QuestionContent :question="subItem" />
+                                </div>
+                            </div>
                         </template>
                     </div>
                 </div>
@@ -108,9 +116,22 @@ export default {
                 
                 questionBack.forEach(item => {// 大题结构
                     item.paperQuestionList.forEach((questionItem) => { // 单题
-                        questionItem.webData = {}
-                        questionItem.webData.answer = ''
-                        questionItem.webData.isAnswer = false
+                        if (questionItem.answerMode !== 'Composite') {
+                            questionItem.webData = {}
+                            questionItem.webData.answer = ''
+                            questionItem.webData.isAnswer = false
+                        } else {
+                            if (questionItem.subqustionList) {
+                                questionItem.subqustionList.forEach((subQueItem) => {
+                                    subQueItem.webData = {}
+                                    subQueItem.webData.answer = ''
+                                    subQueItem.webData.isAnswer = false
+                                })
+                            }
+                            questionItem.webData = {}
+                            questionItem.webData.answer = ''
+                            questionItem.webData.isAnswer = false
+                        }
                     })
                 });
 
@@ -145,6 +166,9 @@ export default {
             const { data } = await submitExam(params)
             // console.log(data)
         },
+        /**
+         * 获取考试答案
+         */
         getSubmitParams (temp) {
             let questionAnswerList = []
             // 获取试题答案列表

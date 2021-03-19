@@ -1,30 +1,41 @@
 <template>
   <div class="blank-content">
       <div v-for="(el, index) in inputAreaList" :key="el.id">
-        <el-input v-model="el.content">
+        <el-input v-model="el.content" v-if='!isEditor'>
           <i slot="prefix" class="inputNum">{{index+1}}</i>
         </el-input>
+        <!-- <Editor :isBlank='isEditor' :contentObj="el" v-else/> -->
+        <vue-ueditor-wrap v-model="el.content" :config="editorConfig" v-else></vue-ueditor-wrap>
       </div>
   </div>
 </template>
 <script>
+import getEditorConfig from '@/utils/Editor/editorConfig'
+import VueUeditorWrap from 'vue-ueditor-wrap'
 export default {
   name: 'BlankFilling',
   props: ['question'],
+  components: {
+    VueUeditorWrap,
+  },
   data () {
     return {
-      aa:'1',
+      editorConfig: {},
+      isEditor: true,
       inputAreaList: this.question.answerArea.inputAreaList
     }
   },
   created () {
-    // console.log(this.question)
+    if (this.isEditor) {
+      // 编辑器设置
+      this.editorConfig = getEditorConfig('BlankFilling')
+    }
   },
   computed: {
     
   },
   watch: {
-    // 如果 `question` 发生改变，这个函数就会运行
+    // 如果 `inputAreaList` 发生改变，这个函数就会运行
     inputAreaList: {
       handler (newContent, oldContent) {
         // console.log(newContent)
