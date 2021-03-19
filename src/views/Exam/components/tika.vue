@@ -36,7 +36,22 @@ export default {
         },
         toUp () {
             
+        },
+        scrool () {
+            this.$nextTick(() => {  
+                this.firstOffsetTop = this.$refs[this.currentKey][0].offsetTop 
+                document.addEventListener('scroll', this.onScroll) 
+                this.list.forEach((val) => {    
+                    this.itemOffsetTop.push({      
+                        key: val.key,      
+                        num: this.$refs[val.key][0].offsetTop - this.firstOffsetTop,
+                        height: this.$refs[val.key][0].clientHeight    
+                    })  
+                })
+            })
         }
+        
+
     }
 }
 </script>

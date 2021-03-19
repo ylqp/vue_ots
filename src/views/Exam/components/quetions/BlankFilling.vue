@@ -22,7 +22,7 @@ export default {
     return {
       editorConfig: {},
       isEditor: true,
-      inputAreaList: this.question.answerArea.inputAreaList
+      inputAreaList: []
     }
   },
   created () {
@@ -30,6 +30,7 @@ export default {
       // 编辑器设置
       this.editorConfig = getEditorConfig('BlankFilling')
     }
+    this.initialAnswer()
   },
   computed: {
     
@@ -61,7 +62,20 @@ export default {
     },
   },
   methods: {
-
+    initialAnswer () {
+      let answers = this.question.webData.answer ? this.question.webData.answer : [] // 此时为数组
+      let tempInputList = JSON.parse(JSON.stringify(this.question.answerArea.inputAreaList)) 
+      if (answers.length) {
+        answers.forEach(answerItem => {
+          tempInputList.forEach(item => {
+            if (answerItem.id === item.id) {
+              item.content = answerItem.content
+            }
+          })
+        })
+      }
+      this.inputAreaList = tempInputList
+    }
   }
 }
 </script>

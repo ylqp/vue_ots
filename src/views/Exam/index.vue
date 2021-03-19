@@ -49,7 +49,7 @@
 <script>
 // arrangementId
 import { startExam, getExamInfo, submitExam } from "@/http/modules/exam";
-import { getExamFlag, dealQueItemAnswer } from "@/utils/Exam";
+import { getExamFlag, dealQueItemAnswer, mountQueItemAnswer } from "@/utils/Exam";
 import Tika from './components/tika.vue'
 import Camera from './components/camera.vue'
 import QuestionStem from './components/questionStem.vue'
@@ -120,6 +120,7 @@ export default {
                             questionItem.webData = {}
                             questionItem.webData.answer = ''
                             questionItem.webData.isAnswer = false
+
                         } else {
                             if (questionItem.subqustionList) {
                                 questionItem.subqustionList.forEach((subQueItem) => {
@@ -132,6 +133,7 @@ export default {
                             questionItem.webData.answer = ''
                             questionItem.webData.isAnswer = false
                         }
+                        questionItem = mountQueItemAnswer(questionItem)
                     })
                 });
 

@@ -30,9 +30,19 @@ export default {
     methods: {
         initialOption () {
             let options = this.question.answerArea.optionList
+            let answers = this.question.webData.answer ? this.question.webData.answer : [] // 此时为数组
             options.forEach(item => {
                 item.chosen = false
             }) 
+            if (answers.length) {
+                answers.forEach(id => {
+                    options.forEach(item => {
+                        if (id == item.id) {
+                            item.chosen = true
+                        }
+                    }) 
+                })
+            }
             this.optionList = options
         },
         chooseOption (el) {
