@@ -6,15 +6,15 @@
                 <span class="f22 fb">{{arrangementName}}</span>
             </div>
             <div class="answerArea">
-                <div v-for="item in questionBack" :key="item.id">
+                <div v-for="(item,index) in questionBack" :key="item.id">
                     <div class="mb20">
                         <span>{{item.sequencenumber + '.'}}</span><span>{{item.name}}</span>
                     </div>
-                    
-                    <div v-for="queItem in item.paperQuestionList" :key="queItem.questionId">
+
+                    <div v-for="(queItem,queIndex) in item.paperQuestionList" :key="queItem.questionId">
                         <template v-if="queItem.answerMode !== 'Composite'">
                         <!-- <template> -->
-                            <div class="queStemBox mb20">
+                            <div class="queStemBox mb20" :id="(index + 1) + '-' + queIndex">
                                 <question-stem :stem='queItem.stem'/>
                             </div>
                             <div class="queContentBox mb20">
@@ -25,7 +25,7 @@
                         <template v-else>
                             <div v-for="subItem in queItem.subqustionList" :key="subItem.questionId">
                                 <div class="queStemBox mb20">
-                                    <question-stem :stem='subItem.stem'/>
+                                    <question-stem :stem='subItem.stem' :id="index + 1"/>
                                 </div>
                                 <div class="queContentBox mb20">
                                     <QuestionContent :question="subItem" />
@@ -80,10 +80,10 @@ export default {
             const { data: examInfo } = await getExamInfo(this.$route.params.id)
             // 开始考试接口调用
             const { data } = await startExam({arrangementId: this.$route.params.id}, examInfo.takePhotoInTest)
-            
+
             // 验证是否可以正常考试
             const examFlag = getExamFlag(data.answerPaperFlag);
-            
+
             if (!examFlag.isAnswer) { // 提示信息
                 this.$message.error(examFlag.msg)
                 this.isShowExam = false
@@ -113,7 +113,7 @@ export default {
                  */
                 let questionBack = data.paper.psOutputDto ? data.paper.psOutputDto : []
                 questionBack = questionBack.filter(item => item.paperQuestionList)
-                
+
                 questionBack.forEach(item => {// 大题结构
                     item.paperQuestionList.forEach((questionItem) => { // 单题
                         if (questionItem.answerMode !== 'Composite') {
@@ -180,7 +180,7 @@ export default {
                     questionAnswerList.push(answerItem)
                 })
             })
-            
+
             questionAnswerList = questionAnswerList.filter(item => item && JSON.stringify(item) !== '{}')
 
             let paperAnswerResult = {
@@ -189,7 +189,7 @@ export default {
             }
             let params = {
                 // 从start接口获取的参数
-                ...this.initialParam, 
+                ...this.initialParam,
                 // 保存还是提交
                 temp,
                 // 试题答案

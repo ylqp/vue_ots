@@ -3,18 +3,19 @@
         <div class="topline"></div>
         <div class="content">
             <el-scrollbar style="height:100%">
-                <div v-for="(item) in questionBack" :key="item.id">
+                <div v-for="(item,index) in questionBack" :key="item.id">
                     <h4>{{item.sequencenumber + '、' + item.name}}</h4>
-                    <div v-for="(queItem, index) in item.paperQuestionList" 
-                        :key="queItem.questionId" 
+                    <div v-for="(queItem, queIndex) in item.paperQuestionList"
+                        :key="queItem.questionId"
                         class="queItem"
                         :class="queItem.webData.isAnswer ? 'answered' : ''"
+                         @click="to(index,queIndex)"
                         >
-                        {{index + 1}}
+                        {{queIndex + 1}}
                     </div>
                 </div>
             </el-scrollbar>
-            
+
         </div>
         <div class="btnBox">
             <el-button type="primary" @click="$emit('dealSubmit', 1)">保存</el-button>
@@ -35,23 +36,24 @@ export default {
             this.$emit('dealSubmit')
         },
         toUp () {
-            
+
         },
         scrool () {
-            this.$nextTick(() => {  
-                this.firstOffsetTop = this.$refs[this.currentKey][0].offsetTop 
-                document.addEventListener('scroll', this.onScroll) 
-                this.list.forEach((val) => {    
-                    this.itemOffsetTop.push({      
-                        key: val.key,      
+            this.$nextTick(() => {
+                this.firstOffsetTop = this.$refs[this.currentKey][0].offsetTop
+                document.addEventListener('scroll', this.onScroll)
+                this.list.forEach((val) => {
+                    this.itemOffsetTop.push({
+                        key: val.key,
                         num: this.$refs[val.key][0].offsetTop - this.firstOffsetTop,
-                        height: this.$refs[val.key][0].clientHeight    
-                    })  
+                        height: this.$refs[val.key][0].clientHeight
+                    })
                 })
             })
-        }
-        
-
+        },
+      to (i,qi) {
+        document.getElementById(`${i+1}-${qi}`).scrollIntoView(true);
+      }
     }
 }
 </script>
