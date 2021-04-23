@@ -6,7 +6,7 @@
               :class="answer==el.id? 'choiced' : ''"
               @click="choiceOption(el)"
         >
-            <div>{{options[index]}}</div>
+            <div class="option">{{options[index]}}</div>
             <div v-html="el.content"></div>
         </div>
     </div>
