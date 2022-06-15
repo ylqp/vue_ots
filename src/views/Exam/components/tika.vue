@@ -51,9 +51,9 @@ export default {
                 })
             })
         },
-      to (i,qi) {
-        document.getElementById(`${i+1}-${qi}`).scrollIntoView(true);
-      }
+        to (i, qi) {
+            document.getElementById(`${i+1}-${qi}`).scrollIntoView(true);
+        }
     }
 }
 </script>

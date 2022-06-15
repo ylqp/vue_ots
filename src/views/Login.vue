@@ -17,7 +17,7 @@
             </div>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="loginIn"  @keyup.enter="loginIn">登录</el-button>
+            <el-button type="primary" @click="loginIn" @keyup.enter="loginIn">登录</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -82,7 +82,8 @@ export default {
     ...mapActions('user', ['getUserFPSettings']),
     async handleCheckCode () {
       this.loginParams.needCheckCode = 1
-      await getCheckCode()
+      const data = await getCheckCode()
+      console.log(data)
       // 刷新最新验证码
       this.checkCodeImg = '/api/checkCode?' + Math.random()
     },

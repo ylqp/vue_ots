@@ -72,6 +72,8 @@ export default {
             questionBack: [],
             // 从开始接口获取到 ===> 需要传回submit的参数
             initialParam: {},
+            // 页面数据
+            pageData: {}
         };
     },
     methods: {
